@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 	"testing"
-
+	"path/filepath"
 	"github.com/pact-foundation/pact-go/v2/log"
 	"github.com/pact-foundation/pact-go/v2/models"
 	"github.com/pact-foundation/pact-go/v2/provider"
@@ -31,10 +31,11 @@ func TestPactProvider(t *testing.T) {
 		ProviderBranch:     os.Getenv("VERSION_BRANCH"),
 		FailIfNoPactsFound: false,
 		// Use this if you want to test without the Pact Broker
-		// PactFiles:                   []string{filepath.FromSlash(fmt.Sprintf("%s/GoAdminService-GoUserService.json", os.Getenv("PACT_DIR")))},
-		BrokerURL:                  fmt.Sprintf("%s://%s", os.Getenv("PACT_BROKER_PROTO"), os.Getenv("PACT_BROKER_URL")),
-		BrokerUsername:             os.Getenv("PACT_BROKER_USERNAME"),
-		BrokerPassword:             os.Getenv("PACT_BROKER_PASSWORD"),
+		PactFiles:                   []string{filepath.FromSlash(fmt.Sprintf("%s/GoAdminService-GoUserService.json", os.Getenv("PACT_DIR")))},
+		// PACT BROKER CONFIGURATION
+		// BrokerURL:                  fmt.Sprintf("%s://%s", os.Getenv("PACT_BROKER_PROTO"), os.Getenv("PACT_BROKER_URL")),
+		// BrokerUsername:             os.Getenv("PACT_BROKER_USERNAME"),
+		// BrokerPassword:             os.Getenv("PACT_BROKER_PASSWORD"),
 		PublishVerificationResults: true,
 		ProviderVersion:            os.Getenv("VERSION_COMMIT"),
 		StateHandlers:              stateHandlers,
